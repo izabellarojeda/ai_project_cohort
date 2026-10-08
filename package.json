@@ -1,0 +1,9 @@
+{
+  "name": "community-hours",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A student community-service hours dashboard",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
