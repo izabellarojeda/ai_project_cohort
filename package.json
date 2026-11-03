@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "description": "A student community-service hours dashboard",
+  "engines": {
+    "node": ">=22.13"
+  },
   "scripts": {
     "start": "node server.js"
   }

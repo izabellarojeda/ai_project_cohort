@@ -21,6 +21,7 @@
         <a class="nav-link active" href="#overview">Overview</a>
         <a class="nav-link" href="#food-board">Find food</a>
         <a class="nav-link" href="#post-surplus">Post surplus</a>
+        <a class="nav-link" href="#student-signup">Join us</a>
       </nav>
       <div class="topbar-note"><span class="status-dot"></span> Community network</div>
     </header>
@@ -185,6 +186,31 @@
           </form>
           <p class="post-footnote"><span aria-hidden="true">◈</span> Only post food that is safe to share and properly stored.</p>
         </aside>
+      </section>
+
+      <section class="student-signup" id="student-signup" aria-labelledby="student-signup-title">
+        <div>
+          <p class="eyebrow">GET INVOLVED</p>
+          <h2 id="student-signup-title">Join the community.</h2>
+          <p class="signup-description">Sign up to take part in local food rescue.</p>
+        </div>
+        <form id="student-form">
+          <div class="student-field">
+            <label for="student-name">Name</label>
+            <input id="student-name" name="name" autocomplete="name" maxlength="100" required>
+          </div>
+          <div class="student-field">
+            <label for="student-email">Email</label>
+            <input id="student-email" name="email" type="email" autocomplete="email" maxlength="254" required>
+          </div>
+          <div class="student-field">
+            <label for="student-grade">Grade</label>
+            <input id="student-grade" name="grade" maxlength="30" placeholder="e.g. 10th grade" required>
+          </div>
+
+          <button class="post-button" type="submit"><span>Sign up</span><span aria-hidden="true">↗</span></button>
+          <p class="form-message" id="student-form-message" role="status" aria-live="polite"></p>
+        </form>
       </section>
     </main>
 

@@ -1,13 +1,31 @@
 const { createServer } = require("node:http");
+const { mkdirSync } = require("node:fs");
 const { readFile } = require("node:fs/promises");
+const { DatabaseSync } = require("node:sqlite");
 const path = require("node:path");
 const { randomUUID } = require("node:crypto");
 
 const port = Number(process.env.PORT) || 3000;
 const publicDirectory = path.join(__dirname, "public");
+const dataDirectory = path.join(__dirname, "data");
 const maxBodySize = 16 * 1024;
 const statuses = ["Available", "Claimed", "In Transit", "Delivered"];
 
+mkdirSync(dataDirectory, { recursive: true });
+const database = new DatabaseSync(path.join(dataDirectory, "goodgather.sqlite"));
+database.exec(`
+  CREATE TABLE IF NOT EXISTS students (
+    id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL COLLATE NOCASE UNIQUE,
+    grade TEXT NOT NULL,
+    created_at TEXT NOT NULL
+  )
+`);
+const findStudentByEmail = database.prepare("SELECT id FROM students WHERE email = ?");
+const insertStudent = database.prepare(
+  "INSERT INTO students (id, name, email, grade, created_at) VALUES (?, ?, ?, ?, ?)",
+);
 function dayFromNow(days) {
   const date = new Date();
   date.setDate(date.getDate() + days);
@@ -139,6 +157,47 @@ async function readJson(request) {
   return JSON.parse(body);
 }
 
+async function handleCreateStudent(request, response) {
+  let input;
+  try {
+    input = await readJson(request);
+  } catch {
+    sendJson(response, 400, { error: "Please submit valid sign-up details." });
+    return;
+  }
+
+  if (!input || typeof input !== "object" || Array.isArray(input)) {
+    sendJson(response, 400, { error: "Please submit valid sign-up details." });
+    return;
+  }
+
+  const name = typeof input.name === "string" ? input.name.trim() : "";
+  const email = typeof input.email === "string" ? input.email.trim().toLowerCase() : "";
+  const grade = typeof input.grade === "string" ? input.grade.trim() : "";
+  if (
+    !name || name.length > 100 ||
+    !email || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
+    !grade || grade.length > 30
+  ) {
+    sendJson(response, 400, { error: "Enter a name, valid email, and grade." });
+    return;
+  }
+
+  try {
+    if (findStudentByEmail.get(email)) {
+      sendJson(response, 409, { error: "That email is already signed up." });
+      return;
+    }
+
+    const student = { id: randomUUID(), name, grade };
+    insertStudent.run(student.id, student.name, email, student.grade, new Date().toISOString());
+    sendJson(response, 201, { student });
+  } catch (error) {
+    console.error("Could not save student sign-up:", error);
+    sendJson(response, 500, { error: "Couldn't save your sign-up. Please try again." });
+  }
+}
+
 function getMetrics() {
   const delivered = listings.filter((listing) => listing.status === "Delivered");
   return {
@@ -265,6 +324,10 @@ const server = createServer(async (request, response) => {
   }
   if (request.method === "POST" && url.pathname === "/api/listings") {
     await handleCreateListing(request, response);
+    return;
+  }
+  if (request.method === "POST" && url.pathname === "/api/students") {
+    await handleCreateStudent(request, response);
     return;
   }
   const statusMatch = url.pathname.match(/^\/api\/listings\/([0-9a-f-]+)\/status$/i);

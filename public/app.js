@@ -2,6 +2,7 @@ const listingList = document.querySelector("#listing-list");
 const emptyState = document.querySelector("#empty-state");
 const listingForm = document.querySelector("#listing-form");
 const formMessage = document.querySelector("#form-message");
+const studentForm = document.querySelector("#student-form");
 const categoryFilters = document.querySelectorAll("[data-category]");
 const statusFilter = document.querySelector("#status-filter");
 const foodIcons = {
@@ -262,6 +263,32 @@ listingForm.addEventListener("submit", async (event) => {
   } finally {
     submitButton.disabled = false;
     submitButton.querySelector("span:first-child").textContent = "Post food listing";
+  }
+});
+
+studentForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const message = document.querySelector("#student-form-message");
+  const submitButton = studentForm.querySelector("button[type='submit']");
+  message.textContent = "";
+  submitButton.disabled = true;
+  submitButton.querySelector("span:first-child").textContent = "Signing up…";
+
+  try {
+    const response = await fetch("/api/students", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(Object.fromEntries(new FormData(studentForm))),
+    });
+    const payload = await response.json();
+    if (!response.ok) throw new Error(payload.error || "Couldn't save your sign-up.");
+    studentForm.reset();
+    message.textContent = `Thanks, ${payload.student.name}! You're signed up.`;
+  } catch (error) {
+    message.textContent = error.message || "Couldn't connect. Please try again.";
+  } finally {
+    submitButton.disabled = false;
+    submitButton.querySelector("span:first-child").textContent = "Sign up";
   }
 });
 
