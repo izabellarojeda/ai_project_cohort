@@ -3,120 +3,195 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f3f5ef">
-    <title>GoodHours | Student service tracker</title>
+    <meta name="theme-color" content="#f5f4ed">
+    <meta name="description" content="Rescue good food. Connect local surplus with the neighbors who need it.">
+    <title>GoodGather | Food, found a good home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/styles.css">
     <script src="/app.js" defer></script>
   </head>
   <body>
     <header class="topbar">
-      <a class="brand" href="/" aria-label="GoodHours home">
+      <a class="brand" href="/" aria-label="GoodGather home">
         <span class="brand-mark" aria-hidden="true">g</span>
-        <span>goodhours<span class="brand-period">.</span></span>
+        <span>goodgather<span class="brand-period">.</span></span>
       </a>
-      <span class="topbar-note"><span class="status-dot"></span> Student service record</span>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-link active" href="#overview">Overview</a>
+        <a class="nav-link" href="#food-board">Find food</a>
+        <a class="nav-link" href="#post-surplus">Post surplus</a>
+      </nav>
+      <div class="topbar-note"><span class="status-dot"></span> Community network</div>
     </header>
 
-    <main>
-      <section class="intro" aria-labelledby="page-title">
-        <div class="intro-copy">
-          <p class="eyebrow"><span class="eyebrow-line"></span> YOUR TIME, MAKING A DIFFERENCE</p>
-          <h1 id="page-title">Show up.<br><span>It adds up.</span></h1>
-          <p class="intro-text">See the hours you have given and the places you have made a difference.</p>
+    <main id="overview">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> GOOD FOOD. GOOD NEIGHBORS.</p>
+          <h1 id="page-title">Surplus,<br><span>meet purpose.</span></h1>
+          <p class="hero-text">A little coordination goes a long way. Get fresh food from local businesses to the people and places that need it.</p>
+          <a class="hero-link" href="#food-board">Explore available food <span aria-hidden="true">↘</span></a>
         </div>
-        <div class="intro-art" aria-hidden="true">
-          <div class="art-sun"></div>
-          <div class="art-number">∞</div>
-          <div class="art-caption">small acts<br>make big ripples</div>
-          <div class="art-spark spark-one">✳</div>
-          <div class="art-spark spark-two">✳</div>
+        <div class="hero-art" aria-hidden="true">
+          <span class="art-sun"></span>
+          <span class="art-leaf leaf-one">✳</span>
+          <span class="art-leaf leaf-two">✳</span>
+          <span class="art-word">share<br>the good</span>
+          <span class="art-caption">rescued nearby<br>shared together</span>
         </div>
+        <div class="hero-side-note"><span>01 — 04</span><span>LOCAL FOOD, IN GOOD HANDS</span></div>
       </section>
 
-      <section class="lookup-layout" aria-label="Find your service record">
-        <div class="lookup-panel">
-          <div class="panel-heading">
-            <div>
-              <p class="eyebrow">STUDENT LOOKUP</p>
-              <h2>Find your hours</h2>
-            </div>
-            <span class="step-number">01 <span>/ 01</span></span>
-          </div>
-          <form id="lookup-form">
-            <label for="email">School email</label>
-            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@school.edu" required>
-
-            <label for="name">Full name</label>
-            <input id="name" name="name" type="text" autocomplete="name" placeholder="As it appears in your record" required>
-
-            <label for="grade">Grade</label>
-            <select id="grade" name="grade" required>
-              <option value="" disabled selected>Select your grade</option>
-              <option value="9">Grade 9</option>
-              <option value="10">Grade 10</option>
-              <option value="11">Grade 11</option>
-              <option value="12">Grade 12</option>
-            </select>
-
-            <button class="submit-button" type="submit">
-              <span>View my service record</span>
-              <span class="button-arrow" aria-hidden="true">↗</span>
-            </button>
-            <p class="privacy-note"><span aria-hidden="true">◈</span> Your details are only used to find your record.</p>
-          </form>
-          <div class="form-message" id="form-message" role="status" aria-live="polite"></div>
-        </div>
-
-        <aside class="demo-panel" aria-label="Try a sample record">
-          <div class="demo-topline"><span class="demo-icon" aria-hidden="true">✳</span><span>READY WHEN YOU ARE</span></div>
-          <div class="demo-content">
-            <p class="demo-kicker">A little preview</p>
-            <h2>Every hour<br>has a story.</h2>
-            <p>From a neighborhood garden to the local food pantry, your time goes somewhere real.</p>
-          </div>
-          <button class="sample-button" id="sample-button" type="button">
-            <span>Explore a sample record</span><span aria-hidden="true">→</span>
-          </button>
-          <div class="demo-illustration" aria-hidden="true"><span>GIVE</span><span>TIME</span><span>GROW</span></div>
-        </aside>
-      </section>
-
-      <section class="results" id="results" hidden aria-live="polite" aria-label="Community service record">
-        <div class="results-heading">
+      <section class="impact-section" aria-labelledby="impact-title">
+        <div class="section-heading impact-heading">
           <div>
-            <p class="eyebrow">YOUR IMPACT, IN GOOD COMPANY</p>
-            <h2 id="student-heading">Service record</h2>
+            <p class="eyebrow">A LITTLE GOOD ADDS UP</p>
+            <h2 id="impact-title">Our neighborhood impact</h2>
           </div>
-          <span class="grade-tag" id="grade-tag"></span>
+          <span class="live-label"><span class="status-dot"></span> LIVE NETWORK</span>
         </div>
-        <div class="stats-row">
-          <article class="stat-block stat-featured">
-            <span class="stat-label">TOTAL HOURS</span>
-            <div class="stat-value"><span id="total-hours">0</span><span class="stat-unit">hrs</span></div>
-            <span class="stat-footnote">every one counts</span>
+        <div class="impact-grid">
+          <article class="impact-card impact-highlight">
+            <div class="impact-icon" aria-hidden="true">↗</div>
+            <span class="impact-label">MEALS SAVED</span>
+            <div class="impact-value" id="meals-saved">—</div>
+            <span class="impact-note">meals delivered to our neighbors</span>
           </article>
-          <article class="stat-block">
-            <span class="stat-label">PLACES HELPED</span>
-            <div class="stat-value"><span id="organization-count">0</span></div>
-            <span class="stat-footnote">local organizations</span>
+          <article class="impact-card">
+            <div class="impact-icon leaf-icon" aria-hidden="true">✳</div>
+            <span class="impact-label">FOOD DISTRIBUTED</span>
+            <div class="impact-value"><span id="pounds-distributed">—</span><small>lbs</small></div>
+            <span class="impact-note">kept fresh and out of landfill</span>
           </article>
-          <article class="stat-block stat-quote">
-            <span class="quote-mark" aria-hidden="true">“</span>
-            <p>Showing up is where change begins.</p>
-            <span class="stat-footnote">KEEP GOING</span>
+          <article class="impact-card">
+            <div class="impact-icon" aria-hidden="true">◌</div>
+            <span class="impact-label">CO₂ AVOIDED</span>
+            <div class="impact-value"><span id="co2-avoided">—</span><small>lbs</small></div>
+            <span class="impact-note">estimated emissions avoided</span>
+          </article>
+          <article class="impact-card impact-available">
+            <div class="impact-icon" aria-hidden="true">＋</div>
+            <span class="impact-label">READY TO RESCUE</span>
+            <div class="impact-value"><span id="available-count">—</span><small>lots</small></div>
+            <span class="impact-note">surplus listings to pick up</span>
           </article>
         </div>
-        <div class="activity-heading">
-          <h3>Where your time went</h3>
-          <span id="entry-count"></span>
+        <p class="estimate-note">Impact estimates update as deliveries are marked complete.</p>
+      </section>
+
+      <section class="workspace" aria-label="Food coordination workspace">
+        <div class="food-board" id="food-board">
+          <div class="section-heading board-heading">
+            <div>
+              <p class="eyebrow">FRESH FROM THE COMMUNITY</p>
+              <h2>Food nearby <span class="board-count" id="board-count"></span></h2>
+            </div>
+            <label class="receiver-picker" for="claiming-org">
+              <span>CLAIMING AS</span>
+              <select id="claiming-org">
+                <option>Riverside Community Pantry</option>
+                <option>Harbor House Shelter</option>
+                <option>City Food Bank Drivers</option>
+              </select>
+            </label>
+          </div>
+          <div class="filter-row" role="group" aria-label="Filter food by category">
+            <button class="filter-chip selected" type="button" data-category="All">All food <span id="all-count"></span></button>
+            <button class="filter-chip" type="button" data-category="Produce">Produce</button>
+            <button class="filter-chip" type="button" data-category="Prepared">Prepared</button>
+            <button class="filter-chip" type="button" data-category="Dairy">Dairy</button>
+            <button class="filter-chip" type="button" data-category="Bakery">Bakery</button>
+            <button class="filter-chip" type="button" data-category="Pantry">Pantry</button>
+            <label class="status-filter" for="status-filter">
+              <span class="visually-hidden">Filter by pickup status</span>
+              <select id="status-filter">
+                <option value="Open">All active</option>
+                <option value="All">All statuses</option>
+                <option value="Available">Available</option>
+                <option value="Claimed">Claimed</option>
+                <option value="In Transit">In transit</option>
+                <option value="Delivered">Delivered</option>
+              </select>
+            </label>
+          </div>
+          <p class="board-message" id="board-message" role="status" aria-live="polite"></p>
+          <div class="listing-list" id="listing-list" aria-live="polite">
+            <div class="loading-state">Gathering today's listings<span>…</span></div>
+          </div>
+          <p class="empty-state" id="empty-state" hidden>No food matches these filters right now. Try another category or check back soon.</p>
         </div>
-        <div class="activity-list" id="activity-list"></div>
+
+        <aside class="post-panel" id="post-surplus">
+          <div class="post-panel-heading">
+            <span class="post-icon" aria-hidden="true">✳</span>
+            <p class="eyebrow">FOR LOCAL FOOD BUSINESSES</p>
+            <h2>Share your<br>surplus.</h2>
+            <p class="post-description">Post what's fresh. A nearby pantry or shelter will take it from here.</p>
+          </div>
+          <form id="listing-form">
+            <label for="item">What's available?</label>
+            <input id="item" name="item" maxlength="100" placeholder="e.g. Fresh produce boxes" required>
+
+            <div class="form-pair">
+              <div>
+                <label for="category">Food category</label>
+                <select id="category" name="category" required>
+                  <option value="Produce">Produce</option>
+                  <option value="Prepared">Prepared meals</option>
+                  <option value="Dairy">Dairy</option>
+                  <option value="Bakery">Bakery</option>
+                  <option value="Pantry">Pantry staples</option>
+                </select>
+              </div>
+              <div>
+                <label for="quantity">Quantity</label>
+                <div class="quantity-input">
+                  <input id="quantity" name="quantity" type="number" min="1" max="10000" value="10" required>
+                  <input id="unit" name="unit" aria-label="Quantity unit" maxlength="20" value="boxes" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-pair">
+              <div>
+                <label for="weight">Total weight (lbs)</label>
+                <input id="weight" name="weight" type="number" min="0.1" max="100000" step="0.1" placeholder="e.g. 40" required>
+              </div>
+              <div>
+                <label for="meals">Meals estimated</label>
+                <input id="meals" name="meals" type="number" min="1" max="100000" placeholder="e.g. 48" required>
+              </div>
+            </div>
+
+            <label for="donor">Business name</label>
+            <input id="donor" name="donor" maxlength="100" placeholder="Your store, restaurant, or farm" required>
+
+            <label for="location">Pickup address</label>
+            <input id="location" name="location" maxlength="160" placeholder="Street address" required>
+
+            <label>Pickup window</label>
+            <div class="form-pair pickup-pair">
+              <input id="pickup-date" name="pickupDate" type="date" aria-label="Pickup date" required>
+              <div class="time-pair">
+                <input id="pickup-start" name="pickupStart" type="time" aria-label="Pickup starts" required>
+                <span>to</span>
+                <input id="pickup-end" name="pickupEnd" type="time" aria-label="Pickup ends" required>
+              </div>
+            </div>
+
+            <button class="post-button" type="submit"><span>Post food listing</span><span aria-hidden="true">↗</span></button>
+            <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+          </form>
+          <p class="post-footnote"><span aria-hidden="true">◈</span> Only post food that is safe to share and properly stored.</p>
+        </aside>
       </section>
     </main>
 
     <footer class="site-footer">
-      <span>GOODHOURS <span class="brand-period">.</span> A LITTLE GOOD GOES A LONG WAY.</span>
-      <span>COMMUNITY SERVICE, COUNTED.</span>
+      <a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true">g</span><span>goodgather<span class="brand-period">.</span></span></a>
+      <span>GOOD FOOD DOES GOOD THINGS. &nbsp;·&nbsp; A COMMUNITY-POWERED NETWORK</span>
+      <a href="#overview">Back to top ↑</a>
     </footer>
   </body>
 </html>
